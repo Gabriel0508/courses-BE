@@ -44,6 +44,9 @@ public class AppUser implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "ins_date", nullable = false)
     private LocalDateTime insDate = LocalDateTime.now();
 
