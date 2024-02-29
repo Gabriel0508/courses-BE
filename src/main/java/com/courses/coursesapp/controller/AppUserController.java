@@ -1,6 +1,7 @@
 package com.courses.coursesapp.controller;
 
 import com.courses.coursesapp.dto.AppUserDto;
+import com.courses.coursesapp.exception.MyBadRequestException;
 import com.courses.coursesapp.service.AppUserService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,13 @@ public class AppUserController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AppUserDto> updateUser(@RequestBody AppUserDto appUserDto, @PathVariable("id") Long userId) throws com.courses.coursesapp.exception.BadRequestException {
+    public ResponseEntity<AppUserDto> updateUser(@RequestBody AppUserDto appUserDto, @PathVariable("id") Long userId) throws MyBadRequestException {
         AppUserDto updatedUser = appUserService.updateUser(appUserDto, userId);
         return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId) throws com.courses.coursesapp.exception.BadRequestException {
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId) throws MyBadRequestException {
         appUserService.deleteUser(userId);
         return ResponseEntity.ok("User deleted successfully!");
     }

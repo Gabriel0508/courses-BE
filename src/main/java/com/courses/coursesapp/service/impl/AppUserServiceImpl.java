@@ -3,7 +3,7 @@ package com.courses.coursesapp.service.impl;
 import com.courses.coursesapp.dto.AppUserDto;
 import com.courses.coursesapp.entity.AppUser;
 import com.courses.coursesapp.entity.RoleEntity;
-import com.courses.coursesapp.exception.BadRequestException;
+import com.courses.coursesapp.exception.MyBadRequestException;
 import com.courses.coursesapp.exception.BusinessException;
 import com.courses.coursesapp.repository.AppUserRepository;
 import com.courses.coursesapp.repository.RoleRepository;
@@ -60,9 +60,9 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public AppUserDto updateUser(AppUserDto appUserDto, Long id) throws BadRequestException {
+    public AppUserDto updateUser(AppUserDto appUserDto, Long id) throws MyBadRequestException {
         AppUser user = appUserRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("User not found with id : " + id));
+                .orElseThrow(() -> new MyBadRequestException("User not found with id : " + id));
         user.setFirstName(appUserDto.getFirstName());
         user.setLastName(appUserDto.getLastName());
         user.setEmail(appUserDto.getEmail());
@@ -73,9 +73,9 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public void deleteUser(Long id) throws BadRequestException {
+    public void deleteUser(Long id) throws MyBadRequestException {
         AppUser user = appUserRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("User not found with id : " + id));
+                .orElseThrow(() -> new MyBadRequestException("User not found with id : " + id));
 
         appUserRepository.deleteById(id);
 
