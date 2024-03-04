@@ -46,7 +46,7 @@ public class Course implements Serializable{
     private String type;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "app_user_id", referencedColumnName = "id")
+    @JoinColumn(name = "owner", referencedColumnName = "id")
     private AppUser owner;
 
     @Column(name = "ins_date", nullable = false)
