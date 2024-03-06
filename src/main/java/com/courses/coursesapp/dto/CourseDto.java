@@ -16,4 +16,5 @@ public class CourseDto {
     private Boolean isEnabled;
     private String type;
     private AppUserDto owner;
+    private String image;
 }

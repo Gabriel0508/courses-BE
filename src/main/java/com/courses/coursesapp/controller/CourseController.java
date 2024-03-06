@@ -6,6 +6,7 @@ import com.courses.coursesapp.service.CourseService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
@@ -53,4 +54,8 @@ public class CourseController {
         return ResponseEntity.ok("Course deleted successfully!");
     }
 
+    @GetMapping(value = "/image/{courseId}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImageForCourse(@PathVariable Long courseId) {
+        return ResponseEntity.ok(courseService.getImageForCourse(courseId));
+    }
 }

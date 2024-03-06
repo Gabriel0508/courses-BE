@@ -3,9 +3,11 @@ package com.courses.coursesapp.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -48,6 +50,10 @@ public class Course implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner", referencedColumnName = "id")
     private AppUser owner;
+
+    @Column(name = "image")
+    @JdbcTypeCode(Types.BINARY)
+    private byte[] image;
 
     @Column(name = "ins_date", nullable = false)
     private LocalDateTime insDate = LocalDateTime.now();

@@ -11,4 +11,6 @@ public interface CourseService {
     CourseDto createCourse(CourseDto courseDto);
     CourseDto updateCourse(CourseDto courseDto, Long id) throws MyBadRequestException;
     void deleteCourse(Long id) throws MyBadRequestException;
+    byte[] getImageForCourse(Long courseId);
+
 }
