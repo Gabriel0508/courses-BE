@@ -51,10 +51,9 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDto createCourse(CourseDto courseDto) {
         Course course = modelMapper.map(courseDto, Course.class);
+        AppUser owner = appUserRepository.findById(courseDto.getOwner().getId()).orElseThrow(() -> new BusinessException("No user was found for id : " + courseDto.getOwner().getId()));
 
-        if(appUserRepository.findById(courseDto.getOwner().getId()).isEmpty()) {
-            throw new BusinessException("No user was found for id : " + courseDto.getOwner().getId());
-        }
+        course.setOwner(owner);
 
         if(courseDto.getImage() != null) {
             course.setImage(Base64.getDecoder().decode(courseDto.getImage().getBytes(StandardCharsets.UTF_8)));
@@ -81,8 +80,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourse(Long id) throws MyBadRequestException {
-        Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new MyBadRequestException("Course not found with id : " + id));
+        courseRepository.findById(id).orElseThrow(() -> new MyBadRequestException("Course not found with id : " + id));
 
         courseRepository.deleteById(id);
     }
