@@ -1,17 +1,13 @@
 package com.courses.coursesapp.controller;
 
 import com.courses.coursesapp.dto.AppUserDto;
-import com.courses.coursesapp.dto.CourseDto;
 import com.courses.coursesapp.dto.UserCourseDto;
 import com.courses.coursesapp.exception.MyBadRequestException;
 import com.courses.coursesapp.service.UserCourseService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +22,14 @@ public class UserCourseController {
     @GetMapping("/{courseId}")
     public ResponseEntity<List<AppUserDto>> getAllUsersByCourseId(@PathVariable("courseId") Long courseId) {
         return new ResponseEntity<>(userCourseService.getUsersByCourse(courseId), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<UserCourseDto> assignUserToCourse (@RequestParam (name="userId") Long userId, @RequestParam (name="courseId") Long courseId) throws MyBadRequestException {
+
+            UserCourseDto dto = userCourseService.assignUserToCourse(userId,courseId);
+
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
 //    @GetMapping("/{id}")

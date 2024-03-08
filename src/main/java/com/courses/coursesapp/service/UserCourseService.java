@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserCourseService {
     List<AppUserDto> getUsersByCourse(Long courseId);
-    UserCourseDto assignUserToCourse(Long userId,Long courseId);
+    UserCourseDto assignUserToCourse(Long userId,Long courseId) throws MyBadRequestException;
     UserCourseDto updateUserAssignedToCourse(UserCourseDto userCourseDto) throws MyBadRequestException;
     void deleteUserAssignment(Long id) throws MyBadRequestException;
 }

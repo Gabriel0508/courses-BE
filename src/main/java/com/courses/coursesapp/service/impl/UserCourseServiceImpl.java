@@ -2,6 +2,9 @@ package com.courses.coursesapp.service.impl;
 
 import com.courses.coursesapp.dto.AppUserDto;
 import com.courses.coursesapp.dto.UserCourseDto;
+import com.courses.coursesapp.entity.AppUser;
+import com.courses.coursesapp.entity.Course;
+import com.courses.coursesapp.entity.UserCourse;
 import com.courses.coursesapp.exception.MyBadRequestException;
 import com.courses.coursesapp.repository.AppUserRepository;
 import com.courses.coursesapp.repository.CourseRepository;
@@ -39,8 +42,18 @@ public class UserCourseServiceImpl implements UserCourseService {
     }
 
     @Override
-    public UserCourseDto assignUserToCourse(Long userId, Long courseId) {
-        return null;
+    public UserCourseDto assignUserToCourse(Long userId, Long courseId) throws MyBadRequestException {
+
+        UserCourse userCourse = new UserCourse();
+
+        AppUser appUser = appUserRepository.findById(userId).orElseThrow(() -> new MyBadRequestException("User not found with id : " + userId));
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new MyBadRequestException("Course not found with id : " + courseId));
+        userCourse.setCourse(course);
+        userCourse.setUser(appUser);
+
+        UserCourse savedUserCourse = userCourseRepository.save(userCourse);
+
+        return modelMapper.map(savedUserCourse, UserCourseDto.class);
     }
 
     @Override
