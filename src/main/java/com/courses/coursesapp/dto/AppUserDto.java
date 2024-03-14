@@ -1,10 +1,7 @@
 package com.courses.coursesapp.dto;
 
 import com.courses.coursesapp.entity.RoleEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Collection;
 
@@ -12,6 +9,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @Setter
 @Getter
+@Builder
 public class AppUserDto {
     private Long id;
     private String firstName;
