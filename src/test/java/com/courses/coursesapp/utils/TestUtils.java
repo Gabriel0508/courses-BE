@@ -22,7 +22,7 @@ public class TestUtils {
                 .lastName("Andrei")
                 .email("pop_andrei@gmail.com")
                 .password("password123")
-                .roles(getRoles())
+                .roles(getRoles()) //Works here
                 .build();
     }
 
